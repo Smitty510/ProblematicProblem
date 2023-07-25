@@ -10,15 +10,19 @@ namespace ProblematicProblem
     class Program
     {
 
+
         static List<string> activities = new List<string>() { "Movies", "Paintball", "Bowling", "Lazer Tag", "LAN Party", "Hiking", "Axe Throwing", "Wine Tasting" };
 
-        public static string addToLIst { get; private set; }
+        //public static string addToList { get; private set; }
 
         static void Main(string[] args)
         {
+            Random rng = new Random();
 
             Console.Write("Hello, welcome to the random activity generator! \nWould you like to generate a random activity? yes/no: ");
+            //string answer = Console.ReadLine();
             bool cont = Console.ReadLine() == "yes" ? true : false;
+
             Console.WriteLine();
 
             Console.Write("We are going to need your information first! What is your name? ");
@@ -30,17 +34,18 @@ namespace ProblematicProblem
             Console.WriteLine();
 
             Console.Write("Would you like to see the current list of activities? Sure/No thanks: ");
-            string seeList = Console.ReadLine();
-            if (seeList == "sure")
-            {
-                cont = true;
-            }
-            else
-            {
-                cont = false;
-            }
+            bool seeList = Console.ReadLine() == "sure" ? true : false;
+            //string seeList = Console.ReadLine();
+            //if (seeList == "sure")
+            //{
+            //    cont = true;
+            //}
+            //else
+            //{
+            //    cont = false;
+            //}
 
-            if (cont)
+            if (seeList)
             {
                 foreach (string activity in activities)
                 {
@@ -62,7 +67,7 @@ namespace ProblematicProblem
                     foreach (string activity in activities)
                     {
                         Console.Write($"{activity} ");
-                        Thread.Sleep(250);
+                        //Thread.Sleep(250);
                     }
 
 
@@ -76,50 +81,40 @@ namespace ProblematicProblem
             while (cont)
             {
                 Console.Write("Connecting to the database");
-            }
 
-
-            for (int i = 0; i < 10; i++)
-            {
-
-
-                Console.Write(". ");
-                Thread.Sleep(500);
-
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.Write(". ");
+                    //Thread.Sleep(500);
+                }
                 Console.WriteLine();
-
                 Console.Write("Choosing your random activity");
-            }
 
-            for (int i = 0; i < 9; i++)
-            {
+                for (int i = 0; i < 9; i++)
+                {
+                    Console.Write(". ");
+                    //Thread.Sleep(500);
+                }
+                Console.WriteLine();
+                int randomNumber = rng.Next(activities.Count);
+                string randomActivity = activities[randomNumber];
 
-                Console.Write(". ");
-                Thread.Sleep(500);
-            }
-            Console.WriteLine();
-            Random rng = new Random();
-            int randomNumber = rng.Next(activities.Count);
-            string randomActivity = activities[randomNumber];
+                if (userAge < 21 && randomActivity == "Wine Tasting")
+                {
 
+                    Console.WriteLine($"Oh no! Looks like you are too young to do {randomActivity}");
+                    Console.WriteLine("Pick something else!");
+                    activities.Remove(randomActivity);
 
-            if (userAge < 21 && randomActivity == "Wine Tasting")
-            {
-
-
-
-
-                Console.WriteLine($"Oh no! Looks like you are too young to do {randomActivity}");
-                Console.WriteLine("Pick something else!");
-                activities.Remove(randomActivity);
-                randomNumber = rng.Next(activities.Count);
-                randomActivity = activities[randomNumber];
+                    randomNumber = rng.Next(activities.Count);
+                    randomActivity = activities[randomNumber];
 
 
-                Console.Write($"Ah got it! {randomActivity}, your random activity is: {userName}! Is this ok or do you want to grab another activity? Keep/Redo: ");
+
+                }
+                Console.Write($"Ah got it! {userName}, your random activity is: {randomActivity}! Is this ok or do you want to grab another activity? Keep/Redo: ");
                 Console.WriteLine();
                 cont =  Console.ReadLine() == "redo" ? true : false;
-
             }
         }
     }
