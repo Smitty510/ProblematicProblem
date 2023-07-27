@@ -20,8 +20,16 @@ namespace ProblematicProblem
             Random rng = new Random();
 
             Console.Write("Hello, welcome to the random activity generator! \nWould you like to generate a random activity? yes/no: ");
-            //string answer = Console.ReadLine();
-            bool cont = Console.ReadLine() == "yes" ? true : false;
+            bool cont = Console.ReadLine() == "yes";
+            if (cont == true)
+            {
+                Console.WriteLine();
+            }
+            else if (cont == false)
+            {
+                Console.WriteLine("Goodbye");
+                return;
+            }
 
             Console.WriteLine();
 
